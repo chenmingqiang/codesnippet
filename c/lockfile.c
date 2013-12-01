@@ -13,7 +13,7 @@
 
 // get from the book "advance unix programming environment, you can also see the 
 // exmaple code from many other open source code
-// how to write a daemon process program
+// lock a whole file with fcntl function
 
 
 #define LOCKMODE (S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)

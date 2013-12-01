@@ -13,7 +13,7 @@
 
 // get from the book "advance unix programming environment, you can also see the 
 // exmaple code from many other open source code (such as memcache)
-// how to write a daemon process program
+// how to write a singleton daemon process program
 
 
 #define LOCKMODE (S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)
@@ -134,6 +134,11 @@ int main(int arc, char * argv[])
   strcat(buf, cmd);  
   strcat(buf, ".pid");
 
+  // daemonize function must be set before already_running 
+  // function. because if daemonize is set after the already_running
+  // function. when the daemonize is run. the parent process is exit.
+  // and the child process will inherit the lock. but why we can't do this.
+  // unforunately we close the fd in the child process. so the lock is released. 
   daemonize(cmd); 
 
   if (already_running(buf)) {
